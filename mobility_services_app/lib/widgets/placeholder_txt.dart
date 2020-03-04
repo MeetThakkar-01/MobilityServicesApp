@@ -7,7 +7,7 @@ class PlaceHolderText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          "",
+          "Get Sevices Mobile To You.",
           textAlign: TextAlign.center,
         )
       ],

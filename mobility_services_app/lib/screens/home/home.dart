@@ -1,26 +1,187 @@
-import "package:flutter/material.dart";
-import 'package:mobility_services_app/services/auth.dart';
+import 'package:flutter/material.dart';
+import 'package:mobility_services_app/widgets/icon_card.dart';
+import 'package:mobility_services_app/widgets/images_cards.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:mobility_services_app/widgets/getlocation.dart';
+import 'package:mobility_services_app/screens/profile.dart';
 
-class Home extends StatelessWidget {
-  final AuthService _auth = AuthService();
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String res;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[50],
-      appBar: AppBar(
-        title: Text("Home"),
-        backgroundColor: Colors.brown[400],
-        elevation: 0.0,
-        actions: <Widget>[
-          FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text("LogOut"),
-            onPressed: () async {
-              await _auth.signOut();
-            },
-          )
-        ],
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(
+                      Icons.my_location,
+                      color: Colors.black,
+                    ),
+                    onPressed: () async {
+                      var result = await getLocation();
+                      setState(() {
+                        res = result;
+                      });
+                    },
+                  ),
+                  Text(
+                    'You\'re in,$res',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.person_outline,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Profile()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: RichText(
+                    text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'Hello, ',
+                              style: TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.pinkAccent)),
+                          TextSpan(text: 'what are you\nlooking for?')
+                        ],
+                        style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black)),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  IconCard(
+                    iconData: FontAwesomeIcons.tools,
+                    text: 'Tools',
+                  ),
+                  IconCard(
+                    iconData: FontAwesomeIcons.hammer,
+                    text: 'Carpenter',
+                  ),
+                  IconCard(
+                    iconData: FontAwesomeIcons.paintRoller,
+                    text: 'Painter',
+                  ),
+                  IconCard(
+                    iconData: FontAwesomeIcons.briefcase,
+                    text: 'Job',
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      'Best Experiences',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.more_horiz,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Expanded(child: Container(child: ImageCards())),
+              SizedBox(
+                height: 25,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(
+                          Icons.home,
+                          color: Colors.pink,
+                          size: 30,
+                        ),
+                        onPressed: () {}),
+                    IconButton(
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        onPressed: () {}),
+                    IconButton(
+                        icon: Icon(
+                          Icons.favorite_border,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        onPressed: () {}),
+                    IconButton(
+                        icon: Icon(
+                          Icons.person_outline,
+                          color: Colors.black,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Profile()),
+                          );
+                        }),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

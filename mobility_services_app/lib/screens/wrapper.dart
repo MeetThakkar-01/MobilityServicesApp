@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:mobility_services_app/models/user.dart';
 import 'package:mobility_services_app/screens/authenticate/authenticate.dart';
 import 'package:mobility_services_app/screens/home/home.dart';
+import 'package:mobility_services_app/screens/home/welcome.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
