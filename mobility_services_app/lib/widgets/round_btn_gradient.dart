@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'file:///D:/MobilityServicesApp/mobility_services_app/lib/services/styles.dart';
 
 import 'file:///D:/MobilityServicesApp/mobility_services_app/lib/widgets/custom_text.dart';
+import 'package:mobility_services_app/screens/authenticate/authenticate.dart';
 
 class RoundBtnGradient extends StatelessWidget {
   final String msg;
@@ -35,7 +36,7 @@ class RoundBtnGradient extends StatelessWidget {
                 size: size ?? 24,
                 weight: FontWeight.bold,
               ),
-            )
+            ),
           ],
         ),
       ),

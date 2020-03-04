@@ -11,19 +11,6 @@ class RectTextInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(color: grey)),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: TextField(
-          obscureText: obscureText,
-          decoration: InputDecoration(
-              hintText: hitText, icon: Icon(icon), border: InputBorder.none),
-          onChanged: (val) {
-            temp = val;
-          },
-        ),
-      ),
-    );
+    return Container();
   }
 }
